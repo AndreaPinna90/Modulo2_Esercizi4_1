@@ -5,7 +5,6 @@
  * Non devono essere presenti magic number (fare quindi uso di macro opportune), commentare opportunatamente tutto il codice.*/
 
 #include <stdio.h>
-#include <stdbool.h>
 #include <stdlib.h>
 #include <time.h>
 #define ANNO_MIN 1980
@@ -14,33 +13,33 @@
 #define CILINDRATA_MAX 1200
 #define CAVALLI_MIN 100
 #define CAVALLI_MAX 200
+#define ENUM_CARBURANTE 3
+#define SOGLIA_CILINDRATA 900 //soglia della cilindrata superata la quale va stampato il risultato
 
-typedef enum {BENZINA, METANO, DIESEL} Carburante;
+typedef enum {BENZINA, METANO, DIESEL} Carburante; //definisco il nuovo tipo Carburante
 
 typedef struct {
     int annoImmatricolazione;
     int cilindrata;
     Carburante tipoCarburante;
     int numeroCavalli;
-} Auto;
+} Auto; //definisco la struttura Auto
 
 int main() {
 
-    srand(time(NULL));
+    Auto alfaMito, fiatPunto; //definisco le due variabili di tipo Auto
 
-    Auto alfaMito;
-    Auto fiatPunto;
-    int sogliaCilindrata = 900; //soglia della cilindrata superata la quale va stampato il risultato
+    srand(time(NULL));
 
     //Randomizzazione dei valori delle 2 variabili di tipo Auto
     alfaMito.annoImmatricolazione = ANNO_MIN + rand() % (ANNO_MAX - ANNO_MIN + 1);
     alfaMito.cilindrata = CILINDRATA_MIN + rand() % (CILINDRATA_MAX - CILINDRATA_MIN + 1);
-    alfaMito.tipoCarburante = 0 + rand() % (2 - 0 + 1); //0, 1 e 2 rappresentano i valori della enumerazione Carburante
+    alfaMito.tipoCarburante = rand() % ENUM_CARBURANTE;
     alfaMito.numeroCavalli = CAVALLI_MIN + rand() % (CAVALLI_MAX - CAVALLI_MIN + 1);
 
     fiatPunto.annoImmatricolazione = ANNO_MIN + rand() % (ANNO_MAX - ANNO_MIN + 1);
     fiatPunto.cilindrata = CILINDRATA_MIN + rand() % (CILINDRATA_MAX - CILINDRATA_MIN + 1);
-    fiatPunto.tipoCarburante = 0 + rand() % (2 - 0 + 1);
+    fiatPunto.tipoCarburante = rand() % ENUM_CARBURANTE;
     fiatPunto.numeroCavalli = CAVALLI_MIN + rand() % (CAVALLI_MAX - CAVALLI_MIN + 1);
 
     //Stampa dei valori delle 2 variabili di tipo Auto
@@ -48,13 +47,13 @@ int main() {
     printf("\nAnno di immatricolazione: %d", alfaMito.annoImmatricolazione);
     printf("\nCarburante [0=BENZINA, 1=METANO, 2=DIESEL]: %d", alfaMito.tipoCarburante);
     printf("\nNumero Cavalli: %d", alfaMito.numeroCavalli);
-    (alfaMito.cilindrata > sogliaCilindrata) > false ? printf("\nCilindrata: %d", alfaMito.cilindrata) : printf(""); //operatore ternario: se la cilindrata è maggiore del valore soglia, stampalo
+    alfaMito.cilindrata > SOGLIA_CILINDRATA ? printf("\nCilindrata: %d", alfaMito.cilindrata) : printf(""); //operatore ternario: se la cilindrata è maggiore del valore soglia, stampalo
 
     printf("\n\nCARATTERISTICHE FIAT PUNTO");
     printf("\nAnno di immatricolazione: %d", fiatPunto.annoImmatricolazione);
     printf("\nCarburante [0=BENZINA, 1=METANO, 2=DIESEL]: %d", fiatPunto.tipoCarburante);
     printf("\nNumero Cavalli: %d", fiatPunto.numeroCavalli);
-    (fiatPunto.cilindrata > sogliaCilindrata) > false ? printf("\nCilindrata: %d", fiatPunto.cilindrata) : printf(""); //operatore ternario: se la cilindrata è maggiore del valore soglia, stampalo
+    fiatPunto.cilindrata > SOGLIA_CILINDRATA ? printf("\nCilindrata: %d", fiatPunto.cilindrata) : printf(""); //operatore ternario: se la cilindrata è maggiore del valore soglia, stampalo
 
     return 0;
 }
