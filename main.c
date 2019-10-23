@@ -13,7 +13,7 @@
 #define CILINDRATA_MAX 1200
 #define CAVALLI_MIN 100
 #define CAVALLI_MAX 200
-#define ENUM_CARBURANTE 3
+#define ENUM_CARBURANTE 4
 #define SOGLIA_CILINDRATA 900 //soglia della cilindrata superata la quale va stampato il risultato
 
 typedef enum {BENZINA, METANO, DIESEL} Carburante; //definisco il nuovo tipo Carburante
